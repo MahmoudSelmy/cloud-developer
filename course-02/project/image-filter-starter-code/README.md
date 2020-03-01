@@ -1,1 +1,1 @@
-Test URL : http://image-filter-eb-dev-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://cdn.pixabay.com/photo/2017/04/03/15/52/love-you-2198772_960_720.png
+
