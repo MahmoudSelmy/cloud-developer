@@ -38,7 +38,6 @@ import { runInNewContext } from 'vm';
       return res.status(400).send(`image_url is required`);
     }
     const filtered_image_path = await filterImageFromURL(image_url);
-    
     res.status(200).sendFile(filtered_image_path);
     return res.on('finish', function () 
     {
