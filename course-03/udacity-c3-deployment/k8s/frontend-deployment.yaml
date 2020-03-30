@@ -3,21 +3,23 @@ kind: Deployment
 metadata:
   labels:
     service: frontend
-  name: frontend
+  name: frontend-v1
 spec:
   replicas: 2
   template:
     metadata:
       labels:
         service: frontend
-        api: external        
+        api: external
+        version: v1.0.0     
     spec:
       containers:
       - image: selmy/udacity-frontend
         name: frontend
         imagePullPolicy: Always          
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
         resources:
           requests:
             memory: "64Mi"

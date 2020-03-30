@@ -12,8 +12,8 @@ kubectl create secret generic env-secret --from-literal=POSTGRESS_USERNAME=Udaci
 
 kubectl apply -f backend-feed-deployment.yaml
 kubectl apply -f backend-user-deployment.yaml
-kubectl apply -f frontend-deployment.yaml
-kubectl apply -f frontend-service.yaml
+kubectl apply -f frontend-deployment-v2.yaml
+kubectl apply -f frontend-service-v2.yaml
 kubectl apply -f backend-feed-service.yaml
 kubectl apply -f backend-user-service.yaml
 kubectl apply -f reverseproxy-deployment.yaml
