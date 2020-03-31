@@ -1,26 +1,31 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: reverseproxy
   labels:
-    app: reverseproxy
-  
+    service: reverseproxy
+  name: reverseproxy
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-        app: reverseproxy
-        version: v1.0.0
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
       labels:
-        app: reverseproxy
-        version: v1.0.0
+        service: reverseproxy
     spec:
       containers:
       - image: selmy/reverseproxy
         name: reverseproxy
-        imagePullPolicy: IfNotPresent              
+        imagePullPolicy: Always          
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"       
         ports:
-        - name: http
-          containerPort: 8080
+        - containerPort: 8080
+      restartPolicy: Always
+
+

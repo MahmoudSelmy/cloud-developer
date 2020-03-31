@@ -8,13 +8,15 @@ spec:
   replicas: 1
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
       labels:
         service: backend-feed
     spec:
       containers:
       - image: selmy/udacity-restapi-feed:latest
         name: backend-feed
-        imagePullPolicy: Always  
+        imagePullPolicy: IfNotPresent  
         resources:
           requests:
             memory: "64Mi"
