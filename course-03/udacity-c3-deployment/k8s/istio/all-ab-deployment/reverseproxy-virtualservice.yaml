@@ -1,21 +1,15 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: frontendinfo
+  name: reverseproxyinfo
 spec:
   hosts:
   - "*"
   gateways:
-  - frontend-gateway
-  http:
+  - reverseproxy-gateway
+ http:
     - route:
       - destination:
-          host: frontend
+          host: reverseproxy
           port:
-            number: 8100
-        weight: 0
-      - destination:
-          host: frontend-v2
-          port:
-            number: 8100
-        weight: 100
+            number: 8080
