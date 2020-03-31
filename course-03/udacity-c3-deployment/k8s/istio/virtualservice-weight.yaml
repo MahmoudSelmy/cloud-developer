@@ -13,9 +13,9 @@ spec:
           host: frontend
           port:
             number: 8100
-        weight: 45
+        weight: 0
       - destination:
           host: frontend-v2
           port:
             number: 8100
-        weight: 55
+        weight: 100

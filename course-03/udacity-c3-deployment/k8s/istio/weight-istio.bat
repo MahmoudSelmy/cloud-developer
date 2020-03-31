@@ -2,9 +2,6 @@
 ECHO Start k8s.
 ECHO CLAER ALL.
 
-kubectl apply -f istio-crds.yaml
-kubectl apply -f istio-demo.yaml
-
 kubectl apply -f frontend-deployment.yaml
 kubectl apply -f frontend-deployment-v2.yaml
 

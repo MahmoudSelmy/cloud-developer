@@ -34,7 +34,8 @@ spec:
     spec:
       containers:
       - image: selmy/udacity-frontend
-        name: frontend   
+        name: frontend 
+        imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 80
