@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-v2
+  labels:
+    app: frontend-v2
+spec:
+  ports:
+  - name: http
+    port: 8100
+    targetPort: http
+  selector:
+    app: frontend-v2
+    version: v2.0.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-v2
+  labels:
+    app: frontend-v2    
+  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: frontend-v2
+        version: v2.0.0
+  template:
+    metadata:
+      labels:
+        app: frontend-v2
+        version: v2.0.0     
+    spec:
+      containers:
+      - image: selmy/udacity-frontend:v2
+        name: frontend-v2
+        imagePullPolicy: IfNotPresent    
+        ports:
+        - name: http
+          containerPort: 80
+---
