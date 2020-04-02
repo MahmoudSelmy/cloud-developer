@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_BUCKET: first-s3-dev
+  AWS_PROFILE: default
+  AWS_REGION: us-east-1
+  JWT_SECRET: helloworld
+  POSTGRESS_DB: UdacityFirstDB
+  POSTGRESS_HOST: udacityfirstdb.cz4rrf2z8ubk.us-east-1.rds.amazonaws.com
+  URL: http://localhost:8100  
+metadata:
+  name: env-config
+  
