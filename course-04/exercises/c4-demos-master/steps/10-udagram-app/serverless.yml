@@ -42,7 +42,8 @@ provider:
     IMAGES_S3_BUCKET: serverless-udagram-images-selmy-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     CONNECTIONS_TABLE: Connections-${self:provider.stage}
-  
+    THUMBNAILS_S3_BUCKET: serverless-udagram-thumbnail-selmy-${self:provider.stage}
+
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -70,7 +71,11 @@ provider:
         - dynamodb:PutItem
         - dynamodb:DeleteItem
       Resource: arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.CONNECTIONS_TABLE}
-    
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: "arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*"
+
 functions:
   GetGroups:
     handler: src/lambda/http/getGroups.handler
@@ -152,6 +157,19 @@ functions:
     events:
       - websocket:
           route: $disconnect
+  
+  ResizeImage:
+    handler: src/lambda/s3/resizeImage.handler
+    events:
+      - sns:
+          arn:
+            Fn::Join:
+              - ':'
+              - - arn:aws:sns
+                - Ref: AWS::Region
+                - Ref: AWS::AccountId
+                - ${self:custom.topicName}
+          topicName: ${self:custom.topicName}
 
 resources:
   Resources:
@@ -278,5 +296,12 @@ resources:
                   AWS:SourceArn: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}
         Topics:
           - !Ref ImagesTopic
+  
+    ThumbnailsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:provider.environment.THUMBNAILS_S3_BUCKET}
+
+
     
     
