@@ -13,7 +13,7 @@ export class TodosAccess
     private readonly todosTable = process.env.TODOS_TABLE) {
   }
 
-  async getAllTodoItems(userId: String): Promise<TodoItem[]>
+  async getUserTodoItems(userId: String): Promise<TodoItem[]>
   {
     const result = await this.docClient.query
     (
