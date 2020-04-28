@@ -1,4 +1,4 @@
-service:
+ service:
   name: serverless-todo-app
 
 plugins:
