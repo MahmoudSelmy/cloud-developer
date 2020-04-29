@@ -4,10 +4,20 @@ import { APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult } f
 
 import { CreateTodoRequest } from '../../requests/CreateTodoRequest'
 
+import {getUserId} from '../utils'
+import { createTodo } from '../../buisnessLogic/todo'
+
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const newTodo: CreateTodoRequest = JSON.parse(event.body)
 
   // TODO: Implement creating a new TODO item
-  
-  return undefined
+  const userId = getUserId(event)
+
+  const createdTodo = await createTodo(newTodo, userId)
+
+  return {
+    statusCode: 201,
+    headers:{'Access-Control-Allow-Origin': '*'},
+    body: JSON.stringify({item: createdTodo})
+  }
 }
