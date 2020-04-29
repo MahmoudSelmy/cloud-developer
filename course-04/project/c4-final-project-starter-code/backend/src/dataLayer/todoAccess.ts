@@ -10,7 +10,8 @@ export class TodosAccess
 
   constructor(
     private readonly docClient: DocumentClient = createDynamoDBClient(),
-    private readonly todosTable = process.env.TODOS_TABLE) {
+    private readonly todosTable = process.env.TODOS_TABLE,
+    private readonly todoIdIndex = process.env.TODO_ID_INDEX) {
   }
 
   async getUserTodoItems(userId: String): Promise<TodoItem[]>
@@ -28,6 +29,36 @@ export class TodosAccess
     const items = result.Items;
     return items as TodoItem[]
   }
+
+  async addAttachmentUrlToTodo(todoId: String, url: String): Promise<boolean>
+  {
+    const result = await this.docClient.query({
+      TableName : this.todosTable,
+      IndexName : this.todoIdIndex,
+      KeyConditionExpression: 'todoId = :todoId',
+      ExpressionAttributeValues: {
+          ':todoId': todoId
+      }
+    }).promise()
+  
+    if (result.Count !=  0)
+    {
+      const todo = {
+        ...result.Items[0],
+        attachmentUrl: url
+      }
+  
+       await this.docClient.put({
+        TableName: this.todosTable,
+        Item: todo
+      }).promise();
+
+      return true;
+    }
+    
+    return false;
+  }
+
 
   async createTodoItem(todo: TodoItem): Promise<TodoItem> 
   {

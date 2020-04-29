@@ -12,6 +12,12 @@ export async function getUserTodoItems(userId: String): Promise<TodoItem[]>
   return todosAccess.getUserTodoItems(userId)
 }
 
+export async function addAttachmentUrlToTodo(todoId: String, url: String): Promise<boolean> 
+{
+  return todosAccess.addAttachmentUrlToTodo(todoId, url)
+}
+
+
 export async function createTodo(createTodoRequest: CreateTodoRequest, userId: string): Promise<TodoItem> 
 {
   const todoId =  uuid.v4();
