@@ -83,12 +83,16 @@ export class TodosAccess
           userId: userId,
           todoId: todoId
         },
-        UpdateExpression: 'SET name = :name, dueDate = :dueDate, done = :done',
+        UpdateExpression: 'SET #n = :name, dueDate = :dueDate, done = :done',
         ExpressionAttributeValues : 
         {
           ':name': updatedTodo.name,
           ':dueDate': updatedTodo.dueDate,
           ':done': updatedTodo.done
+        },
+        ExpressionAttributeNames: 
+        {
+          '#n': 'name'
         }
       }
     ).promise();

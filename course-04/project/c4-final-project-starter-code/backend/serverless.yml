@@ -1,10 +1,9 @@
- service:
+service:
   name: serverless-todo-app
 
 plugins:
   - serverless-webpack
   - serverless-reqvalidator-plugin
-  - serverless-aws-documentation
   - serverless-iam-roles-per-function
 
 provider:
@@ -16,7 +15,7 @@ provider:
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODO_ID_INDEX: TodoIdIndex
-    AUTH_0_SECRET: l0O2AToi9fdGYQYc-CjQBsV3Fa_MTgplmth3tGddkqpwCgV9bLKBE47V_StMNcWI
+    AUTH_0_SECRET: iPTMkv2faqZ3ZlktQI-a0yID6ZX_DQi1vCTrtmRSUd_REm7crLKlP3ny9teyZcPT
     TODOS_S3_BUCKET: serverless-todo-attachment-selmy-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 600
 
