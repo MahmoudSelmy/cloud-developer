@@ -2,6 +2,13 @@ service:
   name: service-10-udagram-app
 
 custom:
+  serverless-offline:
+    port: 3003
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
@@ -24,6 +31,12 @@ plugins:
   - serverless-webpack
   - serverless-reqvalidator-plugin
   - serverless-aws-documentation
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-iam-roles-per-function
+
+package:
+  individually: true
 
 provider:
   name: aws

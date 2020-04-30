@@ -4,6 +4,7 @@ import { Group } from './Group'
 import { getGroups } from '../api/groups-api'
 import { Card, Button, Divider } from 'semantic-ui-react'
 import { History } from 'history'
+import { apiEndpoint } from '../config'
 
 interface GroupsListProps {
   history: History
@@ -29,7 +30,7 @@ export class GroupsList extends React.PureComponent<GroupsListProps, GroupsListS
         groups
       })
     } catch (e) {
-      alert(`Failed to fetch groups: ${e.message}`)
+      alert(`Failed to fetch groups: ${apiEndpoint}`)
     }
   }
 

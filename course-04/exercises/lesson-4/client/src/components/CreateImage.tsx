@@ -64,6 +64,7 @@ export class CreateImage extends React.PureComponent<
       console.log('Created image', uploadInfo)
 
       this.setUploadState(UploadState.UploadingFile)
+      console.log(uploadInfo.uploadUrl)
       await uploadFile(uploadInfo.uploadUrl, this.state.file)
 
       alert('Image was uploaded!')

@@ -7,11 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "jimp": "^0.6.4",
-    "source-map-support": "^0.5.10",
-    "uuid": "^3.3.2",
+    "aws-xray-sdk": "^2.3.3",
+    "jimp": "^0.10.2",
     "jsonwebtoken": "^8.5.1",
-    "middy": "^0.25.0"
+    "middy": "^0.25.0",
+    "source-map-support": "^0.5.10",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
@@ -21,6 +22,9 @@
     "serverless-aws-documentation": "^1.1.0",
     "serverless-reqvalidator-plugin": "^1.0.3",
     "serverless-webpack": "^5.2.0",
+    "serverless-dynamodb-local": "^0.2.38",
+    "serverless-offline": "^4.10.6",
+    "serverless-iam-roles-per-function": "^1.0.4",
     "ts-loader": "^5.3.3",
     "typescript": "^3.2.4",
     "webpack": "^4.29.0",
